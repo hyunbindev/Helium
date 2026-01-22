@@ -1,0 +1,40 @@
+services:
+  helium-card-db:
+    image: mysql:latest
+    container_name: helium-card-db
+    environment:
+      - MYSQL_DATABASE=helium_card
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATA_BASE=helium
+    ports:
+      - '3307:3306'
+    volumes:
+      - 'helium_card_db_data:/var/lib/mysql'
+  helium-user-db:
+    image: mysql:latest
+    container_name: helium-user-db
+    environment:
+      - MYSQL_DATABASE=helium
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATA_BASE=helium
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'helium_member_db_data:/var/lib/mysql'
+  helium-user-redis:
+    image: redis:latest
+    container_name: helium-user-redis
+    environment:
+      - REDIS_PASSWORD=adifoanvckzxilfduaslnkqeiorqiej
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+    ports:
+      - "6379:6379"
+    volumes:
+      - member_redis_data:/data
+volumes:
+  helium_member_db_data:
+  helium_card_db_data:
+  member_redis_data:

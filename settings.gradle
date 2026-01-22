@@ -1,1 +1,5 @@
 rootProject.name = 'Helium'
+include 'user-service'
+include 'gate-way'
+include 'card-service'
+include 'common_auth_module'

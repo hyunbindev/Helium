@@ -1,4 +1,4 @@
-package com.hyunbindev.apiserver.constant.exception
+package com.hyunbindev.userserevice.constant.exception
 
 import org.springframework.http.HttpStatus
 

@@ -1,4 +1,4 @@
-package com.hyunbindev.userserevice.constant.member
+package com.hyunbindev.common_auth_module.constant
 
 import org.springframework.security.core.GrantedAuthority
 

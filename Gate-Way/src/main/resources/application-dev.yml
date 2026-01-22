@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
-spring:
-  application:
-    name: 'Gate-Way'
+logging:
+  level:
+    com.hyunbindev: 'DEBUG'

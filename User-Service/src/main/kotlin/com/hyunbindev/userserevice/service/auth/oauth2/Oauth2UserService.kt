@@ -1,4 +1,4 @@
-package com.hyunbindev.userserevice.service.oauth2
+package com.hyunbindev.userserevice.service.auth.oauth2
 
 import org.slf4j.LoggerFactory
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService

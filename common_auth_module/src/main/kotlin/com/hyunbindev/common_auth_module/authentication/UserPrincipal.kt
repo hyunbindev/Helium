@@ -1,7 +1,7 @@
-package com.hyunbindev.userserevice.security.authentication
+package com.hyunbindev.common_auth_module.authentication
 
-import com.hyunbindev.userserevice.constant.member.Role
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.Role
 import org.springframework.security.core.AuthenticatedPrincipal
 import org.springframework.security.core.GrantedAuthority
 

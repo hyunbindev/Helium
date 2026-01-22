@@ -1,10 +1,10 @@
-package com.hyunbindev.userserevice.service.oauth2
+package com.hyunbindev.userserevice.service.auth.oauth2
 
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
 import com.hyunbindev.userserevice.entity.member.MemberEntity
 import com.hyunbindev.userserevice.security.jwt.JwtProvider
-import com.hyunbindev.userserevice.service.auth.RefreshTokenService
-import com.hyunbindev.userserevice.service.member.OAuthLoginService
+import com.hyunbindev.userserevice.service.auth.OAuthLoginService
+import com.hyunbindev.userserevice.service.auth.TokenService
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -27,7 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder
 class Oauth2SuccessHandlerService(
     private val oAuthLoginService: OAuthLoginService,
     private val jwtProvider: JwtProvider,
-    private val refreshTokenService: RefreshTokenService,
+    private val tokenService: TokenService,
 ) : SimpleUrlAuthenticationSuccessHandler() {
     override fun onAuthenticationSuccess(
         request: HttpServletRequest,
@@ -48,13 +48,14 @@ class Oauth2SuccessHandlerService(
         /**
          * redis에 refresh token 저장
          */
-        refreshTokenService.saveRefreshToken(member.id.toString(), refreshToken)
+        tokenService.saveRefreshToken(member.id.toString(), refreshToken)
 
         /**
          * uri query Param으로 Access Token 전달
          * TODO- front uri 연동 필요 임시 uri /front로 리다이렉트 중
          */
-        val targetUrl:String = UriComponentsBuilder.fromUriString("/front")
+        val targetUrl:String = UriComponentsBuilder
+            .fromUriString("http://localhost:4848")
             .queryParam("token",accessToken)
             .encode()
             .toUriString()

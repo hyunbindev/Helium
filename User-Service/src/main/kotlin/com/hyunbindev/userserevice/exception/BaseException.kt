@@ -1,6 +1,6 @@
-package com.hyunbindev.apiserver.exception
+package com.hyunbindev.userserevice.exception
 
-import com.hyunbindev.apiserver.constant.exception.ExceptionConstant
+import com.hyunbindev.userserevice.constant.exception.ExceptionConstant
 import org.springframework.http.HttpStatus
 
 abstract class BaseException(
@@ -9,4 +9,5 @@ abstract class BaseException(
 ) : RuntimeException(exceptionConstant.getMessage()) {
     val status: HttpStatus = exceptionConstant.getStatus()
     val userMessage: String = userMessage ?: exceptionConstant.getUserMessage()
+    val code: String = if (exceptionConstant is Enum<*>) exceptionConstant.name else "UNKNOWN"
 }

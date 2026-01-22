@@ -1,5 +1,7 @@
-package com.hyunbindev.userserevice.service.oauth2
+package com.hyunbindev.userserevice.service.auth.oauth2
 
+import com.hyunbindev.userserevice.constant.exception.AuthExceptionConst
+import com.hyunbindev.userserevice.exception.AuthException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
@@ -16,6 +18,6 @@ class Oauth2FailHandlerService: AuthenticationFailureHandler {
         exception: AuthenticationException
     ) {
         logger.debug(exception.toString());
+        throw AuthException(AuthExceptionConst.INTERAL_SERVER_ERROR,"OAuth2 인증 실패",true);
     }
-
 }

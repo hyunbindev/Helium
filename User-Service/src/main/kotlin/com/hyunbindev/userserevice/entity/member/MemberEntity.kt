@@ -1,6 +1,8 @@
-package com.hyunbindev.apiserver.entity.member
+package com.hyunbindev.userserevice.entity.member
 
-import com.hyunbindev.apiserver.constant.oauth.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.Role
+
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -32,6 +34,10 @@ class MemberEntity(
 
     @Column(nullable = true)
     val profileImageUrl:String?,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    val authority: Role,
 
     @Column(nullable = false)
     val money : Long=0L,

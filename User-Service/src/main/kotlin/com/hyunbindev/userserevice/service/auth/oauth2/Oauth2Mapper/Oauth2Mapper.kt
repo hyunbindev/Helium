@@ -1,6 +1,5 @@
-package com.hyunbindev.userserevice.service.oauth2.Oauth2Mapper
 
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
 import org.springframework.security.oauth2.core.user.OAuth2User
 
 /**

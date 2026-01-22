@@ -1,8 +1,11 @@
-package com.hyunbindev.userserevice.service.oauth2.Oauth2Mapper
+package com.hyunbindev.userserevice.service.auth.oauth2.Oauth2Mapper
 
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
+import Oauth2Mapper
+import UserOAuthInfo
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Component
+import kotlin.collections.get
 
 /**
  * OAuth2 provider kakao 구현체

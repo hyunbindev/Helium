@@ -1,10 +1,8 @@
-package com.hyunbindev.apiserver.service.member
+package com.hyunbindev.userserevice.service.member
 
-import com.hyunbindev.apiserver.constant.exception.MemberExceptionConst
-import com.hyunbindev.apiserver.entity.member.MemberEntity
-import com.hyunbindev.apiserver.exception.MemberException
-import com.hyunbindev.apiserver.repository.member.MemberRepository
-import com.hyunbindev.apiserver.service.oauth2.Oauth2Mapper.UserOAuthInfo
+import UserOAuthInfo
+import com.hyunbindev.userserevice.entity.member.MemberEntity
+import com.hyunbindev.userserevice.repository.member.MemberRepository
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

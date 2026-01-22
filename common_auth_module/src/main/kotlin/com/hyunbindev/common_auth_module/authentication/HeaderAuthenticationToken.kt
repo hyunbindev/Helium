@@ -1,6 +1,6 @@
-package com.hyunbindev.userserevice.security.authentication
+package com.hyunbindev.common_auth_module.authentication
 
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import java.util.UUID
 

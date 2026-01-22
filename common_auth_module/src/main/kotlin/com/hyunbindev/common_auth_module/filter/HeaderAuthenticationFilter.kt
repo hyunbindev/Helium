@@ -1,9 +1,10 @@
-package com.hyunbindev.userserevice.security.filter
+package com.hyunbindev.common_auth_module.filter
 
-import com.hyunbindev.userserevice.constant.member.Role
-import com.hyunbindev.userserevice.constant.oauth.OAuth2Provider
-import com.hyunbindev.userserevice.security.authentication.HeaderAuthenticationToken
-import com.hyunbindev.userserevice.security.authentication.UserPrincipal
+
+import com.hyunbindev.common_auth_module.authentication.HeaderAuthenticationToken
+import com.hyunbindev.common_auth_module.authentication.UserPrincipal
+import com.hyunbindev.common_auth_module.constant.OAuth2Provider
+import com.hyunbindev.common_auth_module.constant.Role
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -25,7 +26,6 @@ import org.springframework.web.filter.OncePerRequestFilter
  * - @since 2026-01-21
  * OAuth2, 인증 및 redirection 시 filter 제외
  */
-@Component
 class HeaderAuthenticationFilter: OncePerRequestFilter() {
     private val log: Logger = LoggerFactory.getLogger(HeaderAuthenticationFilter::class.java)
     private val pathMatcher: AntPathMatcher=AntPathMatcher()
@@ -54,8 +54,6 @@ class HeaderAuthenticationFilter: OncePerRequestFilter() {
             ),
         )
         SecurityContextHolder.getContext().authentication = authentication
-
-        log.info("{}",authentication.isAuthenticated)
 
         filterChain.doFilter(request, response)
     }

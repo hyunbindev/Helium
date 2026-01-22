@@ -1,4 +1,4 @@
-package com.hyunbindev.userserevice.constant.oauth
+package com.hyunbindev.common_auth_module.constant
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken

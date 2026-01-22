@@ -1,8 +1,9 @@
-package com.hyunbindev.apiserver.service.member
+package com.hyunbindev.userserevice.service.member
 
-import com.hyunbindev.apiserver.entity.member.MemberEntity
-import com.hyunbindev.apiserver.repository.member.MemberRepository
-import com.hyunbindev.apiserver.service.oauth2.Oauth2Mapper.UserOAuthInfo
+import UserOAuthInfo
+import com.hyunbindev.common_auth_module.constant.Role
+import com.hyunbindev.userserevice.entity.member.MemberEntity
+import com.hyunbindev.userserevice.repository.member.MemberRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,6 +32,7 @@ class SignupService(
             providerId = userOAuthInfo.id,
             nickname = userOAuthInfo.nickname,
             profileImageUrl = userOAuthInfo.profileImageUrl,
+            authority = Role.MEMBER
         )
 
         logger.info("Signup User OAuth Info {}:" ,userOAuthInfo)
