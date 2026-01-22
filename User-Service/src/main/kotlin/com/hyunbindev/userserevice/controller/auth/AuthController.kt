@@ -1,5 +1,6 @@
 package com.hyunbindev.userserevice.controller.auth
 
+import com.hyunbindev.common_auth_module.annotation.UserUuid
 import com.hyunbindev.userserevice.constant.exception.AuthExceptionConst
 import com.hyunbindev.userserevice.exception.AuthException
 import com.hyunbindev.userserevice.service.auth.LogOutService
@@ -43,7 +44,7 @@ class AuthController(
      * 로그 아웃
      */
     @GetMapping("/logout")
-    fun logout(auth: Authentication, response: HttpServletResponse): ResponseEntity<Void> {
+    fun logout(@UserUuid auth: Authentication, response: HttpServletResponse): ResponseEntity<Void> {
         logOutService.logout(auth.name)
 
         val cookie = Cookie("refresh_token",null).apply{

@@ -15,8 +15,7 @@ class MemberService(
     private val memberRepository: MemberRepository
 ) {
     @Transactional(readOnly = true)
-    public fun getMember(userId:String):MemberInfoResponse{
-        val userUuid:UUID = UUID.fromString(userId)
+    public fun getMember(userUuid:UUID):MemberInfoResponse{
         val member:MemberEntity = memberRepository.findById(userUuid).orElseThrow{MemberException(MemberExceptionConst.MEMBER_NOT_FOUND)}
         return MemberInfoResponse(
             id = member.id,
