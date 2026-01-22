@@ -1,0 +1,17 @@
+spring:
+  #dev tool
+  devtools:
+    LiveReload:
+      enabled: true
+    restart:
+      enabled: true
+  #profile config
+  config:
+    activate:
+      on-profile: 'dev'
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
+logging:
+  level:
+    com.hyunbindev: 'DEBUG'
