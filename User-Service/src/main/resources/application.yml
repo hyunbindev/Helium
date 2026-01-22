@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
+
+  #security
+  security:
+    #oauth2
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: "${KAKAO_CLIENT_KEY}"
+            client-secret: "${KAKAO_SECRET_KEY}"
+            client-authentication-method: 'client_secret_post'
+            redirect-uri: 'http://localhost:8080/login/oauth2/code/kakao'
+            client-name: 'Kakao'
+            authorization-grant-type: 'authorization_code'
+        provider:
+          kakao:
+            authorization-uri: 'https://kauth.kakao.com/oauth/authorize'
+            token-uri: 'https://kauth.kakao.com/oauth/token'
+            user-info-uri: 'https://kapi.kakao.com/v2/user/me'
+            user-name-attribute: 'id'
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/helium'
+    username: 'root'
+    password: 'root'
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+jwt:
+  access:
+    key: "${JWT_ACCESS_SECRET}"
+    expire: 1_800_000
+  refresh:
+    expire: 604_800_000
