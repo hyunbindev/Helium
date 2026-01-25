@@ -2,7 +2,6 @@ package com.hyunbindev.userserevice.controller
 
 import com.hyunbindev.userserevice.dto.auth.AuthExceptionResponse
 import com.hyunbindev.userserevice.exception.AuthException
-import com.hyunbindev.userserevice.exception.BaseException
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity

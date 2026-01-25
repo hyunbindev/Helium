@@ -1,6 +1,5 @@
 package com.hyunbindev.userserevice.dto.auth
 
-import com.hyunbindev.userserevice.constant.exception.ExceptionConstant
 import java.time.LocalDateTime
 
 

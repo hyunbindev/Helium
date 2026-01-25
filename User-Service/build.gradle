@@ -38,6 +38,7 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
     api project(':common_auth_module')
+    api project(':common_exception_module')
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
