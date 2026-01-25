@@ -1,4 +1,4 @@
-package com.hyunbindev.cardservice.service.card
+package com.hyunbindev.cardservice.service.cardbase
 
 import com.hyunbindev.cardservice.dto.cardbase.CardBaseMetaDataDto
 import com.hyunbindev.cardservice.entity.CardBaseEntity
@@ -11,9 +11,6 @@ import jakarta.transaction.Transactional
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
-import software.amazon.awssdk.services.s3.S3Client
-import java.time.LocalDateTime
-import java.util.Date
 
 @Service
 class CreateBaseCardService(

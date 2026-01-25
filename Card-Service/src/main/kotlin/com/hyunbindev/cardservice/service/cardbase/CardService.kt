@@ -1,4 +1,4 @@
-package com.hyunbindev.cardservice.service.card
+package com.hyunbindev.cardservice.service.cardbase
 
 import org.springframework.stereotype.Service
 
