@@ -1,4 +1,4 @@
-package com.hyunbindev.cardservice.config
+package com.hyunbindev.cardservice.config.auth
 
 import com.hyunbindev.common_auth_module.annotation.UserUuidArgumentResolver
 import org.springframework.context.annotation.Bean

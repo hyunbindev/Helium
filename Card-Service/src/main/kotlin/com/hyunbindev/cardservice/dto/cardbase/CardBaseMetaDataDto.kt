@@ -1,6 +1,6 @@
 package com.hyunbindev.cardservice.dto.cardbase
 
-data class CreateCardBaseDto(
+data class CardBaseMetaDataDto(
     private val name:String,
     private val health:Int,
     private val attack:Int,

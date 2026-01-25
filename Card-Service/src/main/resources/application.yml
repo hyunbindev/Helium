@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: 'card-service'
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
+
+    datasource:
+      url: 'jdbc:mysql://localhost:3307/helium'
+      username: 'root'
+      password: 'root'
+      driver-class-name: 'com.mysql.cj.jdbc.Driver'
+
+minio:
+  endpoint: 'http://localhost:9000'
+  access-key: 'hyunbindev'
+  secret-key: '@wu980616'
+  bucket: 'card-images'

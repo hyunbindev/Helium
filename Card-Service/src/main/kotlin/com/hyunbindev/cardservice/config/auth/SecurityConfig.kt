@@ -1,4 +1,4 @@
-package com.hyunbindev.cardservice.config
+package com.hyunbindev.cardservice.config.auth
 
 import com.hyunbindev.common_auth_module.filter.HeaderAuthenticationFilter
 import org.springframework.context.annotation.Bean
@@ -10,16 +10,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 class SecurityConfig {
     @Bean
-    fun headerAuthenticationFilter(): HeaderAuthenticationFilter{
+    fun headerAuthenticationFilter(): HeaderAuthenticationFilter {
         return HeaderAuthenticationFilter()
     }
     @Bean
-    fun filterChain(http: HttpSecurity,headerAuthenticationFilter:HeaderAuthenticationFilter): DefaultSecurityFilterChain{
+    fun filterChain(http: HttpSecurity, headerAuthenticationFilter: HeaderAuthenticationFilter): DefaultSecurityFilterChain {
         return http.csrf { it.disable() }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
             .authorizeHttpRequests { auth->auth.anyRequest().authenticated() }
-            .addFilterBefore(headerAuthenticationFilter,UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(headerAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()
     }
 }
