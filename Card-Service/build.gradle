@@ -30,6 +30,7 @@ dependencies {
     implementation 'software.amazon.awssdk:s3:2.25.30'
 
     api project(':common_auth_module')
+    api project(':common_exception_module')
 
     implementation 'com.querydsl:querydsl-jpa:5.0.0'
     kapt 'com.querydsl:querydsl-apt:5.0.0:jpa'
