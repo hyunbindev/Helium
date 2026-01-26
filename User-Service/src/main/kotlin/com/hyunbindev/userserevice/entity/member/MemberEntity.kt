@@ -18,10 +18,6 @@ import java.util.UUID
  */
 @Entity
 class MemberEntity(
-    @Id
-    @Column(updatable=false, nullable = false, columnDefinition = "BINARY(16)")
-    val id : UUID = UUID.randomUUID(),
-
     @Enumerated(EnumType.STRING)
     @Column(updatable=false,nullable = false)
     val provider: OAuth2Provider,
@@ -38,8 +34,8 @@ class MemberEntity(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     val authority: Role,
-
-    @Column(nullable = false)
-    val money : Long=0L,
 ) {
+    @Id
+    @Column(updatable=false, nullable = false, columnDefinition = "BINARY(16)")
+    val id : UUID = UUID.randomUUID()
 }

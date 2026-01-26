@@ -1,5 +1,6 @@
 package com.hyunbindev.userserevice.constant.exception
 
+import com.hyunbindev.common_exception_module.ExceptionConstant
 import org.springframework.http.HttpStatus
 
 enum class AuthExceptionConst(
