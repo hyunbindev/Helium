@@ -15,7 +15,7 @@ class CardBaseImageEntity(
     @OneToOne(fetch = FetchType.LAZY)
     val cardBase: CardBaseEntity,
 
-    val key:String,
+    val imageKey:String,
 
     val status: ImageStatus = ImageStatus.PENDING
 ) {

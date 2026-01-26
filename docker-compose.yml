@@ -8,6 +8,7 @@ services:
     environment:
       MINIO_ROOT_USER: "hyunbindev"
       MINIO_ROOT_PASSWORD: "@wu98061612"
+    command: server /data --console-address ":9001"
     volumes:
       - 'helium_card_minio:/data'
 

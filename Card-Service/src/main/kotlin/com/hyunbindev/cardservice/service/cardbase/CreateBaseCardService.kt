@@ -40,8 +40,8 @@ class CreateBaseCardService(
 
         //카드 정보
         val cardBaseImageEntity: CardBaseImageEntity = CardBaseImageEntity(
-            cardBase=cardBaseEntity,
-            key = cardImageKey
+            cardBase = cardBaseEntity,
+            imageKey = cardImageKey,
         )
 
         cardBaseImageRepository.save(cardBaseImageEntity)

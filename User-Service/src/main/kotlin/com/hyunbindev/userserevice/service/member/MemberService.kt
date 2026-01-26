@@ -12,7 +12,7 @@ import java.util.UUID
 
 @Service
 class MemberService(
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
 ) {
     @Transactional(readOnly = true)
     public fun getMember(userUuid:UUID):MemberInfoResponse{
@@ -21,7 +21,6 @@ class MemberService(
             id = member.id,
             nickName = member.nickname,
             profileImageUrl = member.profileImageUrl,
-            money = member.money,
         )
     }
 
@@ -34,7 +33,6 @@ class MemberService(
                 id = member.id,
                 nickName = member.nickname,
                 profileImageUrl = member.profileImageUrl,
-                money = member.money,
             )
         }
     }
