@@ -2,13 +2,27 @@ package com.hyunbindev.cardservice.client.wallet
 
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 
+/**
+ * # user micro service wallet 호출
+ * @author hyunbindev
+ */
 @FeignClient(
     name = "wallet",
     url = $$"${services.wallet-service.url}",
 )
 interface WalletClient {
-    @GetMapping("/api/user/v1/wallet/withdraw")
-    fun withdraw(@RequestBody amount:Long)
+    /**
+     * ### 출금 호출
+     */
+    @PostMapping("/api/user/v1/wallet/withdraw")
+    fun withDraw(@RequestBody amount:Long)
+
+    /**
+     * ### 입금 호출
+     */
+    @PostMapping("/api/user/v1/wallet/deposit")
+    fun withDeposit(@RequestBody amount:Long)
 }

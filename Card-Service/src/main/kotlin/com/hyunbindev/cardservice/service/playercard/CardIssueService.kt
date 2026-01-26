@@ -3,11 +3,9 @@ package com.hyunbindev.cardservice.service.playercard
 import com.hyunbindev.cardservice.entity.CardBaseEntity
 import com.hyunbindev.cardservice.entity.PlayerCardEntity
 import com.hyunbindev.cardservice.repository.PlayerCardRepository
-import com.hyunbindev.cardservice.repository.cardbase.CardBaseImageRepository
 import com.hyunbindev.cardservice.repository.cardbase.CardBaseRepository
 import org.springframework.stereotype.Service
 import java.util.UUID
-import javax.smartcardio.Card
 
 @Service
 class CardIssueService(

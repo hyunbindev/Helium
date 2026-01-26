@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 class FeignConfig {
     @Bean
     fun requestInterceptor(): RequestInterceptor{
-
+        //request 공통 헤더 설정
         return RequestInterceptor{
             template ->
             val authentication: HeaderAuthenticationToken = SecurityContextHolder.getContext().authentication as HeaderAuthenticationToken
