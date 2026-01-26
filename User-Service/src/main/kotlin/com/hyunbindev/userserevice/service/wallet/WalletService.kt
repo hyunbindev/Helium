@@ -61,7 +61,7 @@ class WalletService(
             type = WalletTransactionType.DEPOSIT,
             balanceBefore = beforeBalance,
             balanceAfter = wallet.balance,
-            //시스템 거래 지급인 미거래
+            //시스템 거래 지급인 미기입
             targetMemberId = null,
         )
 
