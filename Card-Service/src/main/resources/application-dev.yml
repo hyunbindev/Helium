@@ -1,0 +1,21 @@
+spring:
+  #dev tool
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  #profile config
+  config:
+    activate:
+      on-profile: 'dev'
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
+logging:
+  level:
+    com.hyunbindev: 'DEBUG'
+
+services:
+  wallet-service:
+    url: 'http://localhost:8081'
