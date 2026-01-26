@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 /**
- * ##재화 거래 내역 Entity
+ * ## 재화 거래 내역 Entity
  * @author hyunbindev
  * @since 2026-01-26
  */
