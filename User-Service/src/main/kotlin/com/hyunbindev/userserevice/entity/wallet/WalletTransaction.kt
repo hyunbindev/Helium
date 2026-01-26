@@ -26,6 +26,9 @@ class WalletTransaction(
     val amount: Long,
 
     @Column(nullable = false)
+    val balanceBefore:Long,
+
+    @Column(nullable = false)
     val balanceAfter:Long,
 
     @Enumerated(EnumType.STRING)

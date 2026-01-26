@@ -3,7 +3,9 @@ package com.hyunbindev.userserevice.service.member
 import UserOAuthInfo
 import com.hyunbindev.common_auth_module.constant.Role
 import com.hyunbindev.userserevice.entity.member.MemberEntity
+import com.hyunbindev.userserevice.entity.wallet.WalletEntity
 import com.hyunbindev.userserevice.repository.member.MemberRepository
+import com.hyunbindev.userserevice.repository.wallet.WalletRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -15,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Service
 class SignupService(
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
+    private val walletRepository: WalletRepository,
 ) {
     private val logger = LoggerFactory.getLogger(SignupService::class.java)
 
@@ -27,7 +30,7 @@ class SignupService(
     @Transactional
     fun signupByOauth2(userOAuthInfo:UserOAuthInfo):MemberEntity{
 
-        val member:MemberEntity = MemberEntity(
+        var member:MemberEntity = MemberEntity(
             provider = userOAuthInfo.provider,
             providerId = userOAuthInfo.id,
             nickname = userOAuthInfo.nickname,
@@ -35,8 +38,17 @@ class SignupService(
             authority = Role.MEMBER
         )
 
-        logger.info("Signup User OAuth Info {}:" ,userOAuthInfo)
+        //유저 entity 영속화
+        member = memberRepository.save(member)
 
-        return memberRepository.save(member)
+        val wallet: WalletEntity = WalletEntity(
+            member.id
+        )
+
+        //유저 지갑 영속화
+        walletRepository.save(wallet)
+
+        logger.info("Signup User OAuth Info {}:" ,userOAuthInfo)
+        return member;
     }
 }
