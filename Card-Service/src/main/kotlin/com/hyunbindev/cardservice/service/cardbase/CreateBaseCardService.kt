@@ -2,7 +2,6 @@ package com.hyunbindev.cardservice.service.cardbase
 
 import com.hyunbindev.cardservice.dto.cardbase.CardBaseMetaDataDto
 import com.hyunbindev.cardservice.entity.CardBaseEntity
-import com.hyunbindev.cardservice.event.CardEvent
 import com.hyunbindev.cardservice.repository.cardbase.CardBaseRepository
 import com.hyunbindev.cardservice.service.S3Service
 import jakarta.transaction.Transactional

@@ -5,11 +5,14 @@ import com.hyunbindev.cardservice.constant.CardExceptionConst
 import com.hyunbindev.cardservice.dto.card.PlayerCardDto
 import com.hyunbindev.cardservice.entity.CardBaseEntity
 import com.hyunbindev.cardservice.entity.PlayerCardEntity
+import com.hyunbindev.cardservice.event.payment.event.PaymentEvent
+import com.hyunbindev.cardservice.event.payment.event.PaymentType
 import com.hyunbindev.cardservice.exception.CardException
 import com.hyunbindev.cardservice.repository.playercard.PlayerCardRepository
 import com.hyunbindev.cardservice.repository.cardbase.CardBaseRepository
 import com.hyunbindev.cardservice.service.cardbase.CardService
 import org.slf4j.LoggerFactory
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -18,7 +21,8 @@ import java.util.UUID
 class CardGachaService(
     private val cardBaseRepository: CardBaseRepository,
     private val playerCardRepository: PlayerCardRepository,
-    private val walletClient: WalletClient
+    private val walletClient: WalletClient,
+    private val eventPublisher: ApplicationEventPublisher,
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
     /**
@@ -38,6 +42,8 @@ class CardGachaService(
         var playerCard: PlayerCardEntity = PlayerCardEntity.createFromBase(baseEntity,userUuid)
 
         playerCard = playerCardRepository.save(playerCard)
+
+        eventPublisher.publishEvent(PaymentEvent.Withdrawal(userUuid,price))
 
         return PlayerCardDto.fromEntity(playerCard)
     }
