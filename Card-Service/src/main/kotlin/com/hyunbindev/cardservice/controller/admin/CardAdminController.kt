@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
 
 @RestController
-@RequestMapping("/api/user/v1/admin/card")
+@RequestMapping("/api/card/v1/admin")
 class CardAdminController(
     private val createBaseCardService: CreateBaseCardService
 )

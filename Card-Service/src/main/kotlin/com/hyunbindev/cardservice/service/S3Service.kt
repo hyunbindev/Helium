@@ -15,6 +15,7 @@ class S3Service(
         val request: PutObjectRequest = PutObjectRequest.builder()
             .bucket(bucket)
             .key(key)
+            .contentType(file.contentType)
             .acl(ObjectCannedACL.PUBLIC_READ)
             .build()
         s3Client.putObject(request, RequestBody.fromInputStream(file.inputStream, file.size))

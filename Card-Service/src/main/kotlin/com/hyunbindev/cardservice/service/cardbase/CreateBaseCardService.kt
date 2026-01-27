@@ -18,7 +18,7 @@ class CreateBaseCardService(
     private val cardBaseImageRepository: CardBaseImageRepository,
     private val s3Service: S3Service,
     private val eventPublisher: ApplicationEventPublisher,
-    private val bucketName:String = "card_image"
+    private val bucketName:String = "cardimage"
 ) {
     @Transactional
     public fun createBaseCard(cardBaseMetaDataDto: CardBaseMetaDataDto, image: MultipartFile){
