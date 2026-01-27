@@ -39,19 +39,6 @@ class CardGachaService(
 
         playerCard = playerCardRepository.save(playerCard)
 
-        return PlayerCardDto(
-            cardId = playerCard.id,
-            displayName = playerCard.displayName,
-            //TODO - 임시 이미지 키만 전달 이후 URL로 바꿔 리턴 해야함
-            imageUrl = playerCard.baseCard.imageKey,
-            ownerUUID = playerCard.owner,
-            health = playerCard.health,
-            defense = playerCard.defense,
-            attack = playerCard.attack,
-            criticalRate = playerCard.criticalRate,
-            criticalDamage = playerCard.criticalDamage,
-            level = playerCard.level,
-            description = baseEntity.description,
-        )
+        return PlayerCardDto.fromEntity(playerCard)
     }
 }

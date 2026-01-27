@@ -42,7 +42,25 @@ class PlayerCardEntity(
     @Column(nullable = false)
     var level:Int,
 
+    @Column(nullable = false)
+    var statPoint:Int = 0,
+
+    @Column(nullable = false)
+    var active:Boolean = true
     ) {
+    fun increaseHealth(point:Int) {
+        health += point*10
+    }
+    fun increaseAttack(point:Int){
+        attack += point*10
+    }
+    fun increaseCriticalRate(point:Int){
+        criticalRate += point*1.5
+    }
+    fun increaseCriticalDamage(point:Int){
+        criticalDamage += point*0.5
+    }
+
     companion object {
         fun createFromBase(base: CardBaseEntity, owner: UUID): PlayerCardEntity {
             return PlayerCardEntity(

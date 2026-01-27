@@ -8,8 +8,10 @@ import java.util.UUID
 
 interface PlayerCardRepository : JpaRepository<PlayerCardEntity, Long> {
     //n+1 문제 해결 fetch join
-    @Query("select p from PlayerCardEntity p join fetch p.baseCard where p.owner = :userUuid order by p.level desc, p.id desc")
+
+    @Query("select p from PlayerCardEntity p join fetch p.baseCard where p.owner = :userUuid and p.active=true order by p.level desc, p.id desc")
     fun findAllByOwner(userUuid: UUID): List<PlayerCardEntity>
-    @Query("select p from PlayerCardEntity p join fetch p.baseCard where p.id = :id")
+
+    @Query("select p from PlayerCardEntity p join fetch p.baseCard where p.id = :id and p.active = true")
     fun findByIdFetchJoin(id:Long): Optional<PlayerCardEntity>
 }

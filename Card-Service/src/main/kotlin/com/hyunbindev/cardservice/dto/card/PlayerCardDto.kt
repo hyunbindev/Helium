@@ -14,6 +14,7 @@ data class PlayerCardDto(
     val criticalRate:Double,
     val criticalDamage:Double,
     val level:Int,
+    val statPoint:Int,
     val description:String,
 ){
     companion object {
@@ -29,6 +30,7 @@ data class PlayerCardDto(
                 criticalDamage = card.criticalDamage,
                 criticalRate = card.criticalRate,
                 level = card.level,
+                statPoint = card.statPoint,
                 description = card.baseCard.description
             )
         }
