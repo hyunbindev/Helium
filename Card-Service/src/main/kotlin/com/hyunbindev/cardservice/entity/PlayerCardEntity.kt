@@ -19,28 +19,29 @@ class PlayerCardEntity(
     val baseCard: CardBaseEntity,
 
     @Column(nullable = false)
-    val displayName: String,
+    var displayName: String,
 
     @Column(nullable = false)
-    val owner: UUID,
+    var owner: UUID,
 
     @Column(nullable = false)
-    val health:Int,
+    var health:Int,
 
     @Column(nullable = false)
-    val defense:Int,
+    var defense:Int,
 
     @Column(nullable = false)
-    val attack:Int,
+    var attack:Int,
 
     @Column(nullable = false)
-    val criticalRate:Double,
+    var criticalRate:Double,
 
     @Column(nullable = false)
-    val criticalDamage:Double,
+    var criticalDamage:Double,
 
     @Column(nullable = false)
-    val level:Int,
+    var level:Int,
+
     ) {
     companion object {
         fun createFromBase(base: CardBaseEntity, owner: UUID): PlayerCardEntity {

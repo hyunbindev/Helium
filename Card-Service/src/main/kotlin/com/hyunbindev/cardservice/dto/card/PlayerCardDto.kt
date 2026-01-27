@@ -1,5 +1,6 @@
 package com.hyunbindev.cardservice.dto.card
 
+import com.hyunbindev.cardservice.entity.PlayerCardEntity
 import java.util.UUID
 
 data class PlayerCardDto(
@@ -14,4 +15,22 @@ data class PlayerCardDto(
     val criticalDamage:Double,
     val level:Int,
     val description:String,
-)
+){
+    companion object {
+        fun fromEntity(card: PlayerCardEntity): PlayerCardDto {
+            return PlayerCardDto(
+                cardId = card.id,
+                imageUrl = card.baseCard.imageKey,
+                displayName = card.displayName,
+                ownerUUID = card.owner,
+                health = card.health,
+                defense = card.defense,
+                attack = card.attack,
+                criticalDamage = card.criticalDamage,
+                criticalRate = card.criticalRate,
+                level = card.level,
+                description = card.baseCard.description
+            )
+        }
+    }
+}

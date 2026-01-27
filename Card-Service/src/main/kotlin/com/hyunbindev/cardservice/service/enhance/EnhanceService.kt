@@ -1,7 +1,70 @@
 package com.hyunbindev.cardservice.service.enhance
 
+import com.hyunbindev.cardservice.constant.CardExceptionConst
+import com.hyunbindev.cardservice.dto.card.PlayerCardDto
+import com.hyunbindev.cardservice.dto.enhance.EnhanceResultDto
+import com.hyunbindev.cardservice.entity.PlayerCardEntity
+import com.hyunbindev.cardservice.exception.CardException
+import com.hyunbindev.cardservice.repository.playercard.PlayerCardRepository
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
+import java.util.UUID
+import kotlin.math.exp
+import kotlin.math.ln
+import kotlin.math.min
 
 @Service
-class EnhanceService {
+class EnhanceService(
+    private val playerCardRepository: PlayerCardRepository,
+) {
+    //카드 강화
+    @Transactional
+    fun enhanceCard(userUuid: UUID, cardId:Long): EnhanceResultDto {
+        // 카드 조회
+        val playerCard: PlayerCardEntity = playerCardRepository.findByIdFetchJoin(cardId).orElseThrow{
+            throw CardException(CardExceptionConst.CARD_NOT_FOUND)
+        }
+        //카드 소유 검증
+        if(playerCard.owner != userUuid) throw CardException(CardExceptionConst.NOT_OWNED_CARD)
+
+        val result = calculateEnhanceResult(playerCard.level)
+
+        when(result){
+            EnhanceResult.SUCCESS->{
+                //강화 성공 로직
+                playerCard.level++
+            }
+            EnhanceResult.KEEP->{
+
+            }
+            EnhanceResult.DESTROY->{
+
+            }
+        }
+        return EnhanceResultDto(
+            cardInfo = PlayerCardDto.fromEntity(playerCard),
+            result = result.name,
+        )
+    }
+
+    private fun calculateEnhanceResult(level:Int):EnhanceResult{
+        val rand = (1..1000000).random()
+        val k = 0.15
+        val successRate = (95.0 * exp(-k * level))+5.0
+
+        val destroyRate = if (level < 5) 0.0 else min(1.0 + ln(level.toDouble()) * 5, 35.0)
+        val successThreshold = successRate * 10000
+        val destroyThreshold = destroyRate * 10000
+        return when {
+            rand <= successThreshold -> EnhanceResult.SUCCESS
+            rand <= successThreshold + destroyThreshold -> EnhanceResult.DESTROY
+            else -> EnhanceResult.KEEP
+        }
+    }
+}
+
+enum class EnhanceResult(val value: Int){
+    SUCCESS(0),
+    KEEP(1),
+    DESTROY(2),
 }

@@ -11,7 +11,11 @@ import java.util.UUID
 class PlayerCardService(
     private val playerCardRepository: PlayerCardRepository
 ) {
-    fun getPlayerCard(userUuid: UUID) {
+    //사용자 보유 카드 조회
+    fun getPlayerCard(userUuid: UUID): List<PlayerCardDto> {
         val cards:List<PlayerCardEntity> = playerCardRepository.findAllByOwner(userUuid)
+        return cards.map{
+            PlayerCardDto.fromEntity(it)
+        }
     }
 }
