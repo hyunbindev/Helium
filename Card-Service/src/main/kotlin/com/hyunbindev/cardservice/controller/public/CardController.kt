@@ -1,5 +1,6 @@
 package com.hyunbindev.cardservice.controller.public
 
+import com.hyunbindev.cardservice.dto.card.PlayerCardDto
 import com.hyunbindev.cardservice.service.cardbase.CardService
 import com.hyunbindev.cardservice.service.playercard.CardGachaService
 import com.hyunbindev.common_auth_module.annotation.UserUuid
@@ -16,8 +17,7 @@ class CardController(
     private val cardGachaService: CardGachaService
 ) {
     @GetMapping("/gacha")
-    fun getCardGacha(@UserUuid userUuid: UUID): ResponseEntity<Void> {
-        cardGachaService.drawRandCard(userUuid)
-        return ResponseEntity.ok().build()
+    fun getCardGacha(@UserUuid userUuid: UUID): ResponseEntity<PlayerCardDto> {
+        return ResponseEntity.ok(cardGachaService.drawRandCard(userUuid))
     }
 }

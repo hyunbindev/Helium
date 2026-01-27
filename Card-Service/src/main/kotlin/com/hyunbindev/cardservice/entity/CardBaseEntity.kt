@@ -1,5 +1,6 @@
 package com.hyunbindev.cardservice.entity
 
+import com.hyunbindev.cardservice.constant.ImageStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -32,6 +33,12 @@ class CardBaseEntity(
 
     @Column(nullable = false)
     val description:String,
+
+    @Column(nullable = false)
+    val imageKey:String,
+
+    @Column(nullable = false)
+    val imageStatus:ImageStatus = ImageStatus.PENDING,
 
     @Column(nullable = false)
     val disabled:Boolean = false
