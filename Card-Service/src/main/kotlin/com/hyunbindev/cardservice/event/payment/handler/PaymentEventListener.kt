@@ -1,6 +1,6 @@
 package com.hyunbindev.cardservice.event.payment.handler
 
-import com.hyunbindev.cardservice.event.payment.event.PaymentEvent
+import com.hyunbindev.cardservice.dto.payment.PaymentEventDto
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -17,13 +17,13 @@ class PaymentEventListener {
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    fun handleSuccess(event: PaymentEvent) {
+    fun handleSuccess(event: PaymentEventDto) {
 
     }
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
-    fun handleFail(event: PaymentEvent) {
+    fun handleFail(event: PaymentEventDto) {
 
     }
 }

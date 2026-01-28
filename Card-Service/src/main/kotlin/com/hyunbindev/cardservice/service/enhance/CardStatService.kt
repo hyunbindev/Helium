@@ -1,6 +1,6 @@
 package com.hyunbindev.cardservice.service.enhance
 
-import com.hyunbindev.cardservice.constant.CardExceptionConst
+import com.hyunbindev.cardservice.constant.exception.CardExceptionConst
 import com.hyunbindev.cardservice.dto.card.PlayerCardDto
 import com.hyunbindev.cardservice.dto.stat.IncreaseStatDto
 import com.hyunbindev.cardservice.entity.PlayerCardEntity
