@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.security.SecureRandom
 import java.util.UUID
 
 @Service()
@@ -24,6 +25,7 @@ class CardGachaService(
     private val eventPublisher: ApplicationEventPublisher,
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
+    private val secureRandom: SecureRandom = SecureRandom()
     /**
      * ### 신규 카드 뽑기 랜덤
      */
