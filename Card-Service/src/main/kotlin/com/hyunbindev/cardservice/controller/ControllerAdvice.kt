@@ -1,6 +1,7 @@
 package com.hyunbindev.cardservice.controller
 
 import com.hyunbindev.cardservice.exception.CardException
+import com.hyunbindev.cardservice.exception.FeignClientException
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
@@ -24,4 +25,14 @@ class ControllerAdvice {
         //exception에 따른 결과값 리턴
         return ResponseEntity.status(e.status).body(errorBody)
     }
+    @ExceptionHandler(FeignClientException::class)
+    fun handleFeignException(e: FeignClientException, response: HttpServletResponse): ResponseEntity<Map<String, Any?>> {
+        val errorBody = mapOf(
+            "code" to e.code,
+            "message" to e.message,
+            "time" to e.timestamp
+        )
+        return ResponseEntity.status(e.status).body(errorBody)
+    }
+
 }

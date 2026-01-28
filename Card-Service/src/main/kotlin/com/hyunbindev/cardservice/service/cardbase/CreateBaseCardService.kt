@@ -40,6 +40,6 @@ class CreateBaseCardService(
         cardBaseEntity = cardBaseRepository.save(cardBaseEntity)
 
         //이미지 후속처리를 위한 이벤트 발행
-        eventPublisher.publishEvent(CardEvent.CardImageUploaded(cardImageKey))
+        //eventPublisher.publishEvent(CardEvent.CardImageUploaded(cardImageKey))
     }
 }

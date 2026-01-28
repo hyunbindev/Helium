@@ -1,7 +1,9 @@
 package com.hyunbindev.userserevice.controller
 
 import com.hyunbindev.userserevice.dto.auth.AuthExceptionResponse
+import com.hyunbindev.userserevice.dto.wallet.WalletExceptionResponse
 import com.hyunbindev.userserevice.exception.AuthException
+import com.hyunbindev.userserevice.exception.WalletException
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
@@ -39,5 +41,12 @@ class ControllerAdvice {
             maxAge = 0
         }
         response.addCookie(cookie)
+    }
+    @ExceptionHandler(WalletException::class)
+    fun walletExceptionHandler(e:WalletException, response: HttpServletResponse): ResponseEntity<WalletExceptionResponse> {
+        return ResponseEntity.status(e.status).body(WalletExceptionResponse(
+            code=e.code,
+            message = e.userMessage,
+        ))
     }
 }

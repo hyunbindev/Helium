@@ -11,5 +11,5 @@ data class PaymentEventDto(
     val paymentType: PaymentType,
     val walletBalance:Long,
 ) {
-    val timestamp:LocalDateTime = LocalDateTime.now()
+    val timestamp:String = LocalDateTime.now().toString()
 }

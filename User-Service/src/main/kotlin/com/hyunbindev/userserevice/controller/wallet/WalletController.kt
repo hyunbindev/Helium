@@ -1,6 +1,7 @@
 package com.hyunbindev.userserevice.controller.wallet
 
 import com.hyunbindev.common_auth_module.annotation.UserUuid
+import com.hyunbindev.userserevice.dto.wallet.PaymentEventDto
 import com.hyunbindev.userserevice.service.wallet.WalletService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -31,12 +32,12 @@ class WalletController(
     }
 
     @PostMapping("/withdraw")
-    fun withdraw(@UserUuid userUuid: UUID, @RequestBody amount:Long): ResponseEntity<Long> {
+    fun withdraw(@UserUuid userUuid: UUID, @RequestBody amount:Long): ResponseEntity<PaymentEventDto> {
         return ResponseEntity.ok(walletService.withdrawal(userUuid,amount))
     }
 
     @PostMapping("/deposit")
-    fun deposit(@UserUuid userUuid: UUID, @RequestBody amount:Long): ResponseEntity<Long> {
+    fun deposit(@UserUuid userUuid: UUID, @RequestBody amount:Long): ResponseEntity<PaymentEventDto> {
         return ResponseEntity.ok(walletService.deposit(userUuid,amount))
     }
 }

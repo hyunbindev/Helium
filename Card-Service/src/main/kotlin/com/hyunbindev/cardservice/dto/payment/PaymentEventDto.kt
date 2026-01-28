@@ -1,5 +1,6 @@
 package com.hyunbindev.cardservice.dto.payment
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.hyunbindev.cardservice.constant.payment.PaymentType
 import java.time.LocalDateTime
 import java.util.UUID
@@ -11,5 +12,6 @@ data class PaymentEventDto(
     val paymentType: PaymentType,
     val walletBalance:Long,
 ) {
-    val timestamp:LocalDateTime = LocalDateTime.now()
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    val timestamp:String = LocalDateTime.now().toString()
 }
