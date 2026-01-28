@@ -30,9 +30,12 @@ class CardGachaService(
     @Transactional
     fun drawRandCard(userUuid: UUID): PlayerCardDto {
         val price: Long = 1000L
+        val payment: PaymentEventDto = walletClient.withDraw(price)
+        //결제 내부 이벤트 발행
+        eventPublisher.publishEvent(payment)
+
 
         //결제 이벤트
-        val payment: PaymentEventDto = walletClient.withDraw(price)
 
         val baseEntity:CardBaseEntity = cardBaseRepository.findRandomOne()?:run {
             //기본 카드 베이스 존재 하지 않을 시
@@ -45,8 +48,6 @@ class CardGachaService(
         //사용자 카드 영속화
         playerCard = playerCardRepository.save(playerCard)
 
-        //결제 내부 이벤트 발행
-        eventPublisher.publishEvent(payment)
 
         //뽑기 결과 반환
         return PlayerCardDto.fromEntity(playerCard)

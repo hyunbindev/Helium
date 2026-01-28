@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.core.ProducerFactory
+import org.springframework.kafka.support.serializer.JacksonJsonSerializer
 
 import kotlin.jvm.java
 
@@ -21,15 +22,14 @@ class KafkaConfig{
         val configProps = mutableMapOf<String, Any>()
         configProps[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
 
-        configProps[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
-
-        configProps[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = "org.springframework.kafka.support.serializer.JsonSerializer"
-
-        return DefaultKafkaProducerFactory(configProps)
+        val jacksonJsonSerializer = JacksonJsonSerializer<Any>().apply {
+            isAddTypeInfo = false
+        }
+        return DefaultKafkaProducerFactory(configProps, StringSerializer(),jacksonJsonSerializer)
     }
 
-    @Bean
-    fun kafkaTemplate(): KafkaTemplate<String, Any> {
+@Bean
+fun kafkaTemplate(): KafkaTemplate<String, Any> {
         return KafkaTemplate(producerFactory())
     }
 }
