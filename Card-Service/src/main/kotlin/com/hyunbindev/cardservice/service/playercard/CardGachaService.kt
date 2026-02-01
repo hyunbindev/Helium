@@ -5,6 +5,7 @@ import com.hyunbindev.cardservice.constant.exception.CardExceptionConst
 import com.hyunbindev.cardservice.dto.card.PlayerCardDto
 import com.hyunbindev.cardservice.dto.payment.PaymentEventDto
 import com.hyunbindev.cardservice.entity.CardBaseEntity
+import com.hyunbindev.cardservice.entity.CardGradeEntity
 import com.hyunbindev.cardservice.entity.PlayerCardEntity
 import com.hyunbindev.cardservice.exception.CardException
 import com.hyunbindev.cardservice.repository.playercard.PlayerCardRepository
@@ -19,6 +20,7 @@ import java.util.UUID
 
 @Service()
 class CardGachaService(
+    private val cardProbabilityService:CardProbabilityService,
     private val cardBaseRepository: CardBaseRepository,
     private val playerCardRepository: PlayerCardRepository,
     private val walletClient: WalletClient,
@@ -36,10 +38,11 @@ class CardGachaService(
         //결제 내부 이벤트 발행
         eventPublisher.publishEvent(payment)
 
+        val grade:CardGradeEntity = cardProbabilityService.getCardGrade()
 
         //결제 이벤트
 
-        val baseEntity:CardBaseEntity = cardBaseRepository.findRandomOne()?:run {
+        val baseEntity:CardBaseEntity = cardBaseRepository.findRandomOneByGrade(grade)?:run {
             //기본 카드 베이스 존재 하지 않을 시
             log.error("[Gacha] Database is empty! No CardBaseEntity found.")
             throw CardException(CardExceptionConst.INTERNAL_SERVER_ERROR)

@@ -1,6 +1,7 @@
 package com.hyunbindev.cardservice.repository.cardbase
 
 import com.hyunbindev.cardservice.entity.CardBaseEntity
+import com.hyunbindev.cardservice.entity.CardGradeEntity
 import com.hyunbindev.cardservice.entity.QCardBaseEntity
 import com.querydsl.core.QueryFactory
 import com.querydsl.core.types.dsl.Expressions
@@ -10,10 +11,14 @@ import java.util.Random
 class CardBaseQueryRepositoryImpl(
     private val queryFactory: JPAQueryFactory
 ):CardBaseQueryRepository {
-    override fun findRandomOne(): CardBaseEntity? {
+    override fun findRandomOneByGrade(grade: CardGradeEntity): CardBaseEntity? {
         val card = QCardBaseEntity.cardBaseEntity
 
-        val total:Long = queryFactory.select(card.count()).from(card).fetchOne() ?: 0L
+        val total:Long = queryFactory
+            .select(card.count())
+            .from(card)
+            .where(card.grade.eq(grade))
+            .fetchOne() ?: 0L
 
         if(total == 0L) return null;
 
