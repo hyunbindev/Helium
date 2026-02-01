@@ -1,6 +1,7 @@
 package com.hyunbindev.cardservice.service.enhance
 
 import com.hyunbindev.cardservice.client.wallet.WalletClient
+import com.hyunbindev.cardservice.constant.enhance.EnhanceResult
 import com.hyunbindev.cardservice.constant.exception.CardExceptionConst
 import com.hyunbindev.cardservice.dto.card.PlayerCardDto
 import com.hyunbindev.cardservice.dto.enhance.EnhanceResultDto
@@ -33,6 +34,9 @@ class EnhanceService(
         val playerCard: PlayerCardEntity = playerCardRepository.findByIdFetchJoin(cardId).orElseThrow{
             throw CardException(CardExceptionConst.CARD_NOT_FOUND)
         }
+
+        if(playerCard.upgradeRequired) throw CardException(CardExceptionConst.UPGRADE_REQURE_CARD)
+
         //카드 소유 검증
         if(playerCard.owner != userUuid) throw CardException(CardExceptionConst.NOT_OWNED_CARD)
 
@@ -45,11 +49,13 @@ class EnhanceService(
         val result = calculateEnhanceResult(playerCard.level)
         eventPublisher.publishEvent(payment)
 
+
         when(result){
             EnhanceResult.SUCCESS->{
                 //강화 성공 로직
+                playerCard.upgradeRequired = true
                 playerCard.level++
-                playerCard.statPoint += 10
+                //스텟 증가
             }
             EnhanceResult.KEEP->{
 
@@ -65,7 +71,7 @@ class EnhanceService(
         )
     }
 
-    private fun calculateEnhanceResult(level:Int):EnhanceResult{
+    private fun calculateEnhanceResult(level:Int): EnhanceResult {
         val rand = (1..1000000).random()
         val k = 0.15
         val successRate = (95.0 * exp(-k * level))+5.0
@@ -79,10 +85,4 @@ class EnhanceService(
             else -> EnhanceResult.KEEP
         }
     }
-}
-
-enum class EnhanceResult(val value: Int){
-    SUCCESS(0),
-    KEEP(1),
-    DESTROY(2),
 }

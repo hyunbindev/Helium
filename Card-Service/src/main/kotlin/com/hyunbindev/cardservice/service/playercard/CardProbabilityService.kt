@@ -11,7 +11,7 @@ class CardProbabilityService(
     private val cardGradeRepository: CardGradeRepository
 ) {
     private lateinit var grades: List<CardGradeEntity>
-    private  var probablites: MutableList<CardGradeProbability> = mutableListOf()
+    private  var probables: MutableList<CardGradeProbability> = mutableListOf()
     private var totalWeight:Int = 0
     private val secureRandom = SecureRandom()
 
@@ -20,14 +20,14 @@ class CardProbabilityService(
         grades = cardGradeRepository.findAllByOrderByWeightAsc()
         grades.forEach{
             totalWeight += it.weight
-            probablites.add(CardGradeProbability(totalWeight,it))
+            probables.add(CardGradeProbability(totalWeight,it))
         }
-        probablites.reverse()
+        probables.reverse()
     }
 
     fun getCardGrade():CardGradeEntity{
         val randNum = secureRandom.nextInt(totalWeight)+1
-        for(p in probablites){
+        for(p in probables){
             if(randNum <= p.gradeWeightSum) return p.grade
         }
 

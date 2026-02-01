@@ -46,13 +46,19 @@ class PlayerCardEntity(
     var statPoint:Int = 0,
 
     @Column(nullable = false)
+    var upgradeRequired:Boolean,
+
+    @Column(nullable = false)
     var active:Boolean = true
     ) {
     fun increaseHealth(point:Int) {
-        health += point*10
+        health += point*100
     }
     fun increaseAttack(point:Int){
         attack += point*10
+    }
+    fun increaseDefense(point:Int){
+        defense++
     }
     fun increaseCriticalRate(point:Int){
         criticalRate += point*1.5
@@ -73,6 +79,7 @@ class PlayerCardEntity(
                 criticalRate = base.criticalRate,
                 criticalDamage = base.criticalDamage,
                 level = 1,
+                upgradeRequired = false
             )
         }
     }

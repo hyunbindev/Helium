@@ -19,7 +19,7 @@ class ControllerAdvice {
 
         val errorBody = mapOf(
             "code" to e.code,
-            "message" to e.message,
+            "message" to e.userMessage,
             "time" to LocalDateTime.now()
         )
         //exception에 따른 결과값 리턴
